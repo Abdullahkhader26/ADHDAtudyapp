@@ -15,7 +15,7 @@ namespace ADHDStudyApp.Controllers
                 return RedirectToAction("EnterEmail", "Account");
             }
 
-           
+
             ViewBag.UserEmail = userEmail;
             return View();
         }

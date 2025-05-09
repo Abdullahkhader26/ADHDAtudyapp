@@ -15,10 +15,10 @@ namespace ADHDStudyApp.Controllers
             _context = context;
         }
 
-        
+
         public IActionResult EnterEmail()
         {
-          return View();
+            return View();
         }
 
         [HttpPost]
@@ -44,7 +44,7 @@ namespace ADHDStudyApp.Controllers
             if (TempData["UserEmail"] == null)
                 return RedirectToAction("EnterEmail");
 
-            TempData.Keep("UserEmail"); 
+            TempData.Keep("UserEmail");
             return View();
         }
 
@@ -61,12 +61,15 @@ namespace ADHDStudyApp.Controllers
 
             if (user != null)
             {
+                HttpContext.Session.SetInt32("UserId", user.Id);
+                HttpContext.Session.SetString("FullName", user.FullName);
                 HttpContext.Session.SetString("UserEmail", user.Email);
-                return RedirectToAction("Index","Dashboard"); 
+               
+                return RedirectToAction("Index", "Dashboard");
             }
 
             ViewBag.Error = "Incorrect Password";
-            TempData["UserEmail"] = email; 
+            TempData["UserEmail"] = email;
             return View();
         }
 
